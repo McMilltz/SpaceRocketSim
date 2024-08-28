@@ -32,12 +32,12 @@ int Window::setup_SDL() {
         return 1;
     }
 
-    window = SDL_CreateWindow(  "Car Simulation", 
+    window = SDL_CreateWindow(  "Super insane rocket holy shit", 
                                 SDL_WINDOWPOS_CENTERED, 
                                 SDL_WINDOWPOS_CENTERED,
                                 width,
                                 height,
-                                0);
+                                SDL_WINDOW_BORDERLESS);
     if (window == NULL) {
         cout << "Error on SDL Window Creation: " << SDL_GetError() << endl;
         return 1;

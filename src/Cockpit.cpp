@@ -20,12 +20,12 @@ void Cockpit::updateEngines(float delta_time) {
   }
 
   // WARNING: debugging engine power
-  // printf("engines: \n"
-  //        "0: %f, 1: %f, 2: %f, 3: %f\n",
-  //        this->engines[0],
-  //        this->engines[1],
-  //        this->engines[2],
-  //        this->engines[3]);
+  printf("engines: \n"
+         "0: %f, 1: %f, 2: %f, 3: %f\n",
+         this->engines[0],
+         this->engines[1],
+         this->engines[2],
+         this->engines[3]);
 
 
 }
