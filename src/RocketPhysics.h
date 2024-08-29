@@ -1,20 +1,24 @@
+#include <math.h>
+
 typedef struct Vector2f{
   float x;
   float y;
 } Vector2f;
 
 #define AMOUNT_OF_ENGINES 4
+#define START_POSITION {.x = 100, .y=100}
 
 class Physics{
-  // public:
-  // typedef struct ThrustData {
-  //   const float LEVER_O = 5;
-  //   const float LEVER_I = 3;
-  //   const float THRUST_I = 10;
-  //   const float THRUST_O = 10;
-  // } Data;
+  public:
+  typedef struct ThrustData {
+    const float LEVER[AMOUNT_OF_ENGINES] = {5,3,-3,-5};
+    const float THRUST[AMOUNT_OF_ENGINES] = {10,5,5,10};
+  } Data;
+
+  Data thrustData;
 
   public:
+        Physics();
   void update(float _dt);
   void setThruster(float* _t);
 
@@ -30,6 +34,7 @@ class Physics{
     
   private:
     Vector2f  mVelocity;
+    float     mSpeed;
     Vector2f  mPosition;
     float     mRotSpeed;
     float     mRotation;
