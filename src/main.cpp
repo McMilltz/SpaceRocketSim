@@ -1,5 +1,6 @@
 #include "Window.h"
 #include "constants.h"
+#include "Rocket.h"
 #include "Cockpit.h"
 
 #include <SDL2/SDL.h>
@@ -9,7 +10,8 @@
 #include <cstdlib>
 #include <iostream>
 
-Cockpit cockpit;
+Rocket rocket;
+Cockpit* cockpit;
 
 bool isRunning;
 int lastUpdate;
@@ -34,16 +36,16 @@ void processInput() {
           break;
           
           case SDLK_z:
-            cockpit.setEnginePressed(0, true);
+            cockpit->setEnginePressed(0, true);
           break;
           case SDLK_b:
-            cockpit.setEnginePressed(1, true);
+            cockpit->setEnginePressed(1, true);
           break;
           case SDLK_SLASH:
-            cockpit.setEnginePressed(2, true);
+            cockpit->setEnginePressed(2, true);
           break;
           case SDLK_RETURN:
-            cockpit.setEnginePressed(3, true);
+            cockpit->setEnginePressed(3, true);
 
         }
       break;
@@ -52,16 +54,16 @@ void processInput() {
         switch (event.key.keysym.sym) {
           
           case SDLK_z:
-            cockpit.setEnginePressed(0, false);
+            cockpit->setEnginePressed(0, false);
           break;
           case SDLK_b:
-            cockpit.setEnginePressed(1, false);
+            cockpit->setEnginePressed(1, false);
           break;
           case SDLK_SLASH:
-            cockpit.setEnginePressed(2, false);
+            cockpit->setEnginePressed(2, false);
           break;
           case SDLK_RETURN:
-            cockpit.setEnginePressed(3, false);
+            cockpit->setEnginePressed(3, false);
 
         }
       break;
@@ -74,7 +76,7 @@ void processInput() {
 
 void updateSimulation() {
 
-  cockpit.updateEngines(deltaTime);
+  rocket.update(deltaTime);
 
 }
 
@@ -109,7 +111,7 @@ bool setup() {
 
 int main(void) {
 
-  Window w(800, 600);
+  Window w(WINDOW_WIDTH, WINDOW_HEIGHT);
   w.setup_SDL();
 
   isRunning = setup();
