@@ -1,4 +1,5 @@
 #include "Cockpit.h"
+#include "RocketPhysics.h"
 
 #ifndef ROCKET_H
 #define ROCKET_H
@@ -8,6 +9,9 @@ class Rocket {
 
 private:
   Cockpit cockpit;
+  Physics physics;
+  int width;
+  int height;
 
 
 public:
@@ -15,7 +19,10 @@ public:
 
   void setEnginePressed(int index, bool value);
   void update(float deltaTime);
+  void getCoordinates(float& x, float& y);
   Cockpit* getCockpit();
+  int getWidth();
+  int getHeight();
 
 
 };

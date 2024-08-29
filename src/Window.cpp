@@ -53,6 +53,10 @@ int Window::setup_SDL() {
 
 }
 
+SDL_Renderer* Window::getRenderer() {
+  return this->renderer;
+}
+
 void Window::wait() {
 
     SDL_Delay(2000);

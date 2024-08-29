@@ -6,3 +6,5 @@
 
 #define WINDOW_WIDTH 800
 #define WINDOW_HEIGHT 600
+
+#define SCORE_COLOR 100, 100, 100, 255

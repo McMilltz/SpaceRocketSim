@@ -2,6 +2,7 @@
 #define SCORE_H
 
 #include <SDL2/SDL_rect.h>
+#include <SDL2/SDL_render.h>
 class Score {
 
 private:
@@ -10,6 +11,7 @@ private:
 public:
   Score(int width, int height);
   void setToRandomLocation();
+  void draw(SDL_Renderer* renderer);
 
   SDL_Rect getHitbox();
   

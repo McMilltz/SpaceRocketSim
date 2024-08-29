@@ -2,16 +2,22 @@
 #include "constants.h"
 #include "Rocket.h"
 #include "Cockpit.h"
+#include "Score.h"
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_events.h>
 #include <SDL2/SDL_keycode.h>
+#include <SDL2/SDL_render.h>
 #include <SDL2/SDL_timer.h>
+#include <cmath>
 #include <cstdlib>
 #include <iostream>
 
 Rocket rocket;
 Cockpit* cockpit;
+Score score(50, 50);
+Window w(WINDOW_WIDTH, WINDOW_HEIGHT);
+SDL_Renderer* renderer;
 
 bool isRunning;
 int lastUpdate;
@@ -74,13 +80,41 @@ void processInput() {
 
 }
 
+bool checkForScoreCollision() {
+
+  float rocketX;
+  float rocketY;
+  rocket.getCoordinates(rocketX, rocketY);
+  
+  float dX = score.getHitbox().x + score.getHitbox().w - 
+    (rocketX + rocket.getWidth());
+  float dY = score.getHitbox().y + score.getHitbox().h - 
+    (rocketY + rocket.getHeight());
+
+  return ((sqrt(pow(dX, 2) + pow(dY, 2))) < 
+      ((rocket.getWidth() + rocket.getHeight()) / 4.0f + 
+       (score.getHitbox().w + score.getHitbox().h) / 4.0f));
+
+}
+
 void updateSimulation() {
 
   rocket.update(deltaTime);
+  if (checkForScoreCollision()) {
+    score.setToRandomLocation();
+    //TODO: increase player score
+  }
 
 }
 
 void render() {
+
+  SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+  SDL_RenderClear(renderer);
+
+  score.draw(renderer);
+
+  SDL_RenderPresent(renderer);
 
 }
 
@@ -105,13 +139,14 @@ void gameLoop() {
 bool setup() {
 
   lastUpdate = SDL_GetTicks();
+  score.setToRandomLocation();
+  renderer = w.getRenderer();
   return true;
 
 }
 
 int main(void) {
 
-  Window w(WINDOW_WIDTH, WINDOW_HEIGHT);
   w.setup_SDL();
 
   isRunning = setup();

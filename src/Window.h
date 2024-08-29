@@ -19,6 +19,7 @@ public:
   ~Window();
 
   int setup_SDL();
+  SDL_Renderer* getRenderer();
   void wait();
 
 };
