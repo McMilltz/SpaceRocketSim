@@ -20,6 +20,8 @@ class Physics{
 
   float getRotSpeed();
   Vector2f getVelocity();
+  float getX();
+  float getY();
 
 
   public:

@@ -20,4 +20,9 @@ Vector2f Physics::getVelocity(){
   return mVelocity;
 }
 
-
+float Physics::getX() {
+  return mPosition.x;
+}
+float Physics::getY() {
+  return mPosition.y;
+}
