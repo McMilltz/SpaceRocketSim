@@ -12,6 +12,7 @@ Rocket::Rocket() : physics() {
 
 void Rocket::update(float deltaTime) {
 
+  cockpit.updateEngines(deltaTime);
   physics.setThruster(cockpit.getEngines());
   physics.update(deltaTime);
 
