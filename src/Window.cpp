@@ -25,7 +25,7 @@ Window::~Window() {
   SDL_Quit();
 
 }
-
+//this is an important comment!?!?!?!?!?!?
 int Window::setup_SDL() {
 
   if (SDL_Init(SDL_INIT_VIDEO) != 0) {
