@@ -14,10 +14,10 @@
 #include <iostream>
 
 Rocket rocket;
-Cockpit* cockpit;
+Cockpit* cockpit = nullptr;
 Score score(50, 50);
 Window w(WINDOW_WIDTH, WINDOW_HEIGHT);
-SDL_Renderer* renderer;
+SDL_Renderer* renderer = nullptr;
 
 bool isRunning;
 int lastUpdate;
@@ -91,7 +91,7 @@ bool checkForScoreCollision() {
   float dY = score.getHitbox().y + score.getHitbox().h - 
     (rocketY + rocket.getHeight());
 
-  return ((sqrt(pow(dX, 2) + pow(dY, 2))) < 
+  return ((pow(dX, 2) + pow(dY, 2)) < 
       ((rocket.getWidth() + rocket.getHeight()) / 4.0f + 
        (score.getHitbox().w + score.getHitbox().h) / 4.0f));
 
@@ -113,6 +113,7 @@ void render() {
   SDL_RenderClear(renderer);
 
   score.draw(renderer);
+  rocket.draw(renderer);
 
   SDL_RenderPresent(renderer);
 
@@ -139,9 +140,30 @@ void gameLoop() {
 bool setup() {
 
   lastUpdate = SDL_GetTicks();
+  cockpit = rocket.getCockpit();
+  if (cockpit == nullptr) {
+    std::cout << "Failed to get cockpit from rocket.\n";
+  }
   score.setToRandomLocation();
   renderer = w.getRenderer();
+  if (renderer == nullptr) {
+    std::cout << "Failed to get renderer from window.\n";
+    return 1;
+  }
+
   return true;
+
+}
+
+void cleanUp() {
+
+  w.cleanUp();
+  if (cockpit != nullptr) {
+    cockpit = nullptr;
+  }
+  if (renderer != nullptr) {
+    renderer = nullptr;
+  }
 
 }
 
@@ -151,6 +173,8 @@ int main(void) {
 
   isRunning = setup();
   gameLoop();
+
+  cleanUp();
 
   return EXIT_SUCCESS;
 

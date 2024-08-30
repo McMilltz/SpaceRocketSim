@@ -53,6 +53,21 @@ int Window::setup_SDL() {
 
 }
 
+void Window::cleanUp() {
+
+  if (this->renderer != nullptr) {
+    SDL_DestroyRenderer(renderer);
+    renderer = nullptr;
+  }
+  if (this->window != nullptr) {
+    SDL_DestroyWindow(window);
+    window = nullptr;
+  }
+
+  SDL_Quit();
+
+}
+
 SDL_Renderer* Window::getRenderer() {
   return this->renderer;
 }
