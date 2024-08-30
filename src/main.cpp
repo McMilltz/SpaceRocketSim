@@ -91,7 +91,7 @@ bool checkForScoreCollision() {
   float dY = score.getHitbox().y + score.getHitbox().h - 
     (rocketY + rocket.getHeight());
 
-  return ((pow(dX, 2) + pow(dY, 2)) < 
+  return ((sqrt(pow(dX, 2) + pow(dY, 2))) < 
       ((rocket.getWidth() + rocket.getHeight()) / 4.0f + 
        (score.getHitbox().w + score.getHitbox().h) / 4.0f));
 
