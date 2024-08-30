@@ -15,7 +15,7 @@ public:
   float* getEngines();
   void setEnginePressed(int index, bool value);
   
-
+  int getEngineBitMask();
 };
 
 #endif // !COCKPIT_H

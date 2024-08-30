@@ -87,9 +87,9 @@ bool checkForScoreCollision() {
   rocket.getCoordinates(rocketX, rocketY);
   
   float dX = score.getHitbox().x + score.getHitbox().w - 
-    (rocketX + rocket.getWidth());
+    rocketX;
   float dY = score.getHitbox().y + score.getHitbox().h - 
-    (rocketY + rocket.getHeight());
+    rocketY;
 
   return ((sqrt(pow(dX, 2) + pow(dY, 2))) < 
       ((rocket.getWidth() + rocket.getHeight()) / 4.0f + 
@@ -150,6 +150,8 @@ bool setup() {
     std::cout << "Failed to get renderer from window.\n";
     return 1;
   }
+
+  rocket.loadTexture(renderer);
 
   return true;
 

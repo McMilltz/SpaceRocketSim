@@ -8,5 +8,7 @@
 
 #define WINDOW_WIDTH 800
 #define WINDOW_HEIGHT 600
+#define SPRITE_SHEET_COUNT 16
+#define SPRITE_DIR "./sprites/"
 
-#define SCORE_COLOR 100, 100, 100, 255
+#define SCORE_COLOR 100, 100, 100, 255 

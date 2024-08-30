@@ -48,3 +48,9 @@ float Physics::getX() {
 float Physics::getY() {
   return mPosition.y;
 }
+float Physics::getRotation_deg(){
+  return mRotation * 180.0f / M_PI;
+}
+float Physics::getRotation(){
+  return mRotation;
+}

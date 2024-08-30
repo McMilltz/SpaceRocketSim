@@ -1,4 +1,5 @@
 #include "Cockpit.h"
+#include <cmath>
 #include <cstdio>
 
 
@@ -39,4 +40,15 @@ void Cockpit::setEnginePressed(int index, bool value) {
   
   this->input[index] = value;
 
+}
+
+int Cockpit::getEngineBitMask(){
+  int result = 0;
+  for(int it=0; it < AMOUNT_OF_ENGINES; it++){
+    if(engines[it] > 0.0f){
+      result += pow(2, it);
+    }
+  }
+  
+  return result;
 }

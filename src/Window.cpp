@@ -1,5 +1,6 @@
 #include "Window.h"
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
 #include <SDL2/SDL_render.h>
 #include <SDL2/SDL_video.h>
 #include <cstddef>
@@ -48,7 +49,9 @@ int Window::setup_SDL() {
         cout << "Error on SDL Renderer Creation: " << SDL_GetError() << endl;
         return 1;
     }
-
+    if(IMG_Init(IMG_INIT_PNG) != IMG_INIT_PNG){
+      std::cout << "Error initializing IMG_INIT_PNG.\n";
+    }
     return 0;
 
 }

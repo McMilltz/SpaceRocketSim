@@ -26,6 +26,8 @@ class Physics{
   Vector2f getVelocity();
   float getX();
   float getY();
+  float getRotation_deg();
+  float getRotation();
 
 
   public:
