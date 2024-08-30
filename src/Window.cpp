@@ -2,6 +2,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_render.h>
 #include <SDL2/SDL_video.h>
+#include <SDL2/SDL_image.h>
 #include <cstddef>
 
 Window::Window(int width, int height) {
@@ -27,29 +28,34 @@ Window::~Window() {
 
 int Window::setup_SDL() {
 
-    if (SDL_Init(SDL_INIT_VIDEO) != 0) {
-        cout << "Error on SDL initialization: " << SDL_GetError() << endl;
-        return 1;
-    }
+  if (SDL_Init(SDL_INIT_VIDEO) != 0) {
+    cout << "Error on SDL initialization: " << SDL_GetError() << endl;
+    return 1;
+  }
 
-    window = SDL_CreateWindow(  "Super insane rocket holy shit", 
-                                SDL_WINDOWPOS_CENTERED, 
-                                SDL_WINDOWPOS_CENTERED,
-                                width,
-                                height,
-                                SDL_WINDOW_BORDERLESS);
-    if (window == NULL) {
-        cout << "Error on SDL Window Creation: " << SDL_GetError() << endl;
-        return 1;
-    }
+  window = SDL_CreateWindow(  "Super insane rocket holy shit", 
+                            SDL_WINDOWPOS_CENTERED, 
+                            SDL_WINDOWPOS_CENTERED,
+                            width,
+                            height,
+                            SDL_WINDOW_BORDERLESS);
+  if (window == NULL) {
+    cout << "Error on SDL Window Creation: " << SDL_GetError() << endl;
+    return 1;
+  }
 
-    renderer = SDL_CreateRenderer(window, 0, 0);
-    if (renderer == NULL) {
-        cout << "Error on SDL Renderer Creation: " << SDL_GetError() << endl;
-        return 1;
-    }
+  renderer = SDL_CreateRenderer(window, 0, 0);
+  if (renderer == NULL) {
+    cout << "Error on SDL Renderer Creation: " << SDL_GetError() << endl;
+    return 1;
+  }
 
-    return 0;
+  if (!(IMG_Init(IMG_INIT_PNG) & IMG_INIT_PNG)) {
+    cout << "Error loading SDL2_Image: " << SDL_GetError() << endl;
+    return 1;
+  }
+
+  return 0;
 
 }
 
@@ -64,6 +70,7 @@ void Window::cleanUp() {
     window = nullptr;
   }
 
+  IMG_Quit();
   SDL_Quit();
 
 }
