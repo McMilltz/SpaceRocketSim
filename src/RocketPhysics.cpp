@@ -1,4 +1,5 @@
 #include "RocketPhysics.h"
+#include <cmath>
 
 Physics::Physics() : mSpeed(0.0f), mRotSpeed(0.0f), mRotation(0.0f){
   mVelocity = {.x = 0.0f, .y=0.0f};
@@ -24,6 +25,8 @@ void Physics::update(float _dt){
   mVelocity.y -= Force * std::cos(mRotation) * _dt;
   mPosition.x += mVelocity.x * _dt;
   mPosition.y += mVelocity.y * _dt;
+
+  mSpeed = sqrt(pow(mVelocity.x, 2) + pow(mVelocity.y, 2));
 
 }
 
@@ -53,4 +56,7 @@ float Physics::getRotation_deg(){
 }
 float Physics::getRotation(){
   return mRotation;
+}
+float Physics::getSpeed() {
+  return mSpeed;
 }

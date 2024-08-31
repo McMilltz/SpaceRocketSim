@@ -1,6 +1,7 @@
 #include "Rocket.h"
 #include "Cockpit.h"
 #include <SDL2/SDL_render.h>
+#include <cmath>
 #include <string>
 
 
@@ -13,7 +14,10 @@ Rocket::Rocket() : physics() {
   geometry.h = ROCKET_HEIGHT;
   geometry.x = 0.0f;
   geometry.y = 0.0f;
-  
+  compass.w = COMPASS_WIDTH;
+  compass.h = COMPASS_HEIGHT;
+  compass.x = 20;
+  compass.y = 20;
 }
 
 void Rocket::loadTexture(SDL_Renderer* renderer){
@@ -23,7 +27,8 @@ void Rocket::loadTexture(SDL_Renderer* renderer){
     completedFile = file + std::to_string(it) + ".png";
     
     spriteSheet = IMG_Load(completedFile.c_str());
-    texture[it] = SDL_CreateTextureFromSurface(renderer,spriteSheet);
+    texture[it] = SDL_CreateTextureFromSurface(renderer, 
+                                               spriteSheet);
   }
 }
 
@@ -51,8 +56,25 @@ void Rocket::getCoordinates(float& x, float& y) {
 void Rocket::draw(SDL_Renderer* renderer) {
 
   int spriteIndex = cockpit.getEngineBitMask();
-  SDL_RenderCopyEx(renderer, texture[spriteIndex], NULL, &geometry,
-                   physics.getRotation_deg(),NULL,SDL_FLIP_NONE);
+  SDL_RenderCopyEx(renderer, texture[spriteIndex], NULL, 
+                   &geometry, physics.getRotation_deg(), 
+                   NULL, SDL_FLIP_HORIZONTAL);
+
+  SDL_RenderCopyEx(renderer, texture[spriteIndex], NULL, 
+                   &compass, physics.getRotation_deg(), 
+                   NULL, SDL_FLIP_HORIZONTAL);
+
+  SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+  SDL_RenderDrawLine(renderer, 
+                     physics.getX(), physics.getY(), 
+                     WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
+
+
+  int distance = sqrt(pow(physics.getX() - WINDOW_WIDTH / 2, 2) + 
+                      pow(physics.getY() - WINDOW_HEIGHT / 2, 2));
+  std::cout << "Distance: " << distance << "\t";
+
+  std::cout << "Speed: " << (int) physics.getSpeed() << "\n";
 
 }
 

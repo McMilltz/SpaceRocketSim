@@ -16,6 +16,7 @@ private:
   int width;
   int height;
   SDL_Rect geometry;
+  SDL_Rect compass;
 
   SDL_Surface* spriteSheet;
   SDL_Texture* texture[SPRITE_SHEET_COUNT];

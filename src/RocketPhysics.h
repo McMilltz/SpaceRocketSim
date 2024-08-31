@@ -1,4 +1,5 @@
 #include <math.h>
+#include "constants.h"
 
 typedef struct Vector2f{
   float x;
@@ -6,13 +7,14 @@ typedef struct Vector2f{
 } Vector2f;
 
 #define AMOUNT_OF_ENGINES 4
-#define START_POSITION {.x = 100, .y=100}
+#define START_POSITION {.x = WINDOW_WIDTH / 2, \
+                        .y = WINDOW_HEIGHT / 2}
 
 class Physics{
   public:
   typedef struct ThrustData {
-    const float LEVER[AMOUNT_OF_ENGINES] = {5,3,-3,-5};
-    const float THRUST[AMOUNT_OF_ENGINES] = {10,5,5,10};
+    const float LEVER[AMOUNT_OF_ENGINES] = {15, 1.5, -1.5, -15};
+    const float THRUST[AMOUNT_OF_ENGINES] = {5, 25, 25, 5};
   } Data;
 
   Data thrustData;
@@ -28,11 +30,12 @@ class Physics{
   float getY();
   float getRotation_deg();
   float getRotation();
+  float getSpeed();
 
 
   public:
-    const float J_zz = 100; //Inertia of rotation
-    const float m = 10;     //mass
+    const float J_zz = 300; //Inertia of rotation
+    const float m = 3;     //mass
     
   private:
     Vector2f  mVelocity;

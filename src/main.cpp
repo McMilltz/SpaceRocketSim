@@ -109,7 +109,7 @@ void updateSimulation() {
 
 void render() {
 
-  SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+  SDL_SetRenderDrawColor(renderer, BACKGROUND_COLOR);
   SDL_RenderClear(renderer);
 
   score.draw(renderer);
