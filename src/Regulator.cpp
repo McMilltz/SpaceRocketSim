@@ -10,6 +10,10 @@ void Regulator::setStarPosition(float _x, float _y){
   mStarPosition = {.x = _x, .y = _y};
 }
 
+void Regulator::toggleAutopilot(){
+  active = !active;
+}
+
 void Regulator::calculateTranslation(){
   starDist = mStarPosition - mPosition;
   starDist.x -= mVelocity.x*sqrt(2.0f*N_2PI/ALPHA);
@@ -89,22 +93,7 @@ bool Regulator::calculateOvershootAngle(){
 
 }
 
-void Regulator::update(float _dt){
-
-  int mx, my;
-  SDL_GetMouseState(&mx, &my);
-  mStarPosition.x = (float)mx;
-  mStarPosition.y = (float)my;
-  // SDL_GetMouseState(&(mStarPosition.x), &(mStarPosition.y));
-  calculateTranslation();
-  calculateTargetAngle();
-  bool OmG = calculateOvershootAngle();
-  if(mRotSpeed > 0.0f){
-      ang_acc = OmG ? 1.0f : -1.0f;
-  }else{
-      ang_acc = OmG ? -1.0f : 1.0f;
-  }
-
+void Regulator::regulateEngines(){
   if(ang_acc >= 0.5f){
     mEngines[0] = 1.0f;
     mEngines[AMOUNT_OF_ENGINES - 1] = 0.0f;
@@ -131,7 +120,20 @@ void Regulator::update(float _dt){
     mEngines[2] = 0.0f;
   }
 
+}
 
+void Regulator::update(float _dt){
+  if(active){
+    calculateTranslation();
+    calculateTargetAngle();
+    bool OmG = calculateOvershootAngle();
+    if(mRotSpeed > 0.0f){
+      ang_acc = OmG ? 1.0f : -1.0f;
+    }else{
+      ang_acc = OmG ? -1.0f : 1.0f;
+    }
+    regulateEngines();
+  }
   Physics::update(_dt);
 
 }
