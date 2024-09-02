@@ -4,6 +4,7 @@
 typedef struct Vector2f{
   float x;
   float y;
+  float magnitude();
 } Vector2f;
 
 #define AMOUNT_OF_ENGINES 4
@@ -31,6 +32,7 @@ class Physics{
   float getRotation_deg();
   float getRotation();
   float getSpeed();
+  float getAngle(Vector2f _v);
 
 
   public:

@@ -81,6 +81,9 @@ void Rocket::draw(SDL_Renderer* renderer) {
 Cockpit* Rocket::getCockpit() {
   return &this->cockpit;
 }
+Physics* Rocket::getPhysics(){
+  return &this->physics;
+}
 int Rocket::getWidth() {
   return this->width;
 }

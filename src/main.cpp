@@ -1,14 +1,17 @@
 #include "Window.h"
+#include "NerdWindow.h"
 #include "constants.h"
 #include "Rocket.h"
 #include "Cockpit.h"
 #include "Score.h"
+#include "TextRenderer.h"
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_events.h>
 #include <SDL2/SDL_keycode.h>
 #include <SDL2/SDL_render.h>
 #include <SDL2/SDL_timer.h>
+#include <SDL2/SDL_video.h>
 #include <cmath>
 #include <cstdlib>
 #include <iostream>
@@ -16,8 +19,11 @@
 Rocket rocket;
 Cockpit* cockpit = nullptr;
 Score score(50, 50);
-Window w(WINDOW_WIDTH, WINDOW_HEIGHT);
-SDL_Renderer* renderer = nullptr;
+Window mainWindow(WINDOW_WIDTH, WINDOW_HEIGHT);
+NerdWindow nerdWindow(NERD_WINDOW_WIDTH, NERD_WINDOW_HEIGHT);
+SDL_Renderer* mainRenderer = nullptr;
+SDL_Renderer* nerdRenderer = nullptr;
+TextRenderer textRenderer;
 
 bool isRunning;
 int lastUpdate;
@@ -109,13 +115,29 @@ void updateSimulation() {
 
 void render() {
 
-  SDL_SetRenderDrawColor(renderer, BACKGROUND_COLOR);
-  SDL_RenderClear(renderer);
+  // Main Window
+  SDL_SetRenderDrawColor(mainRenderer, MAIN_BACKGROUND_COLOR);
+  SDL_RenderClear(mainRenderer);
 
-  score.draw(renderer);
-  rocket.draw(renderer);
+  score.draw(mainRenderer);
+  rocket.draw(mainRenderer);
 
-  SDL_RenderPresent(renderer);
+  SDL_RenderPresent(mainRenderer);
+
+  // Nerd Window
+  SDL_SetRenderDrawColor(nerdRenderer, NERD_BACKGROUND_COLOR);
+  SDL_RenderClear(nerdRenderer);
+
+  nerdWindow.drawEnginePower(nerdRenderer,
+                             cockpit->getEngines());
+
+  Physics* ph = rocket.getPhysics();
+  nerdWindow.drawVelocityInformation(nerdRenderer,
+                                     &textRenderer, 
+                                     ph->getSpeed(),
+                                     ph->getAngle(ph->getVelocity()));
+
+  SDL_RenderPresent(nerdRenderer);
 
 }
 
@@ -140,18 +162,50 @@ void gameLoop() {
 bool setup() {
 
   lastUpdate = SDL_GetTicks();
+
+  // Windows
+  SDL_SetWindowPosition(mainWindow.getWindow(), MAIN_WINDOW_POSITION);
+  SDL_SetWindowPosition(nerdWindow.getWindow(), NERD_WINDOW_POSITION);
+
+  // Cockpit
   cockpit = rocket.getCockpit();
   if (cockpit == nullptr) {
     std::cout << "Failed to get cockpit from rocket.\n";
   }
+
+  // Score
   score.setToRandomLocation();
-  renderer = w.getRenderer();
-  if (renderer == nullptr) {
-    std::cout << "Failed to get renderer from window.\n";
+
+  // Renderer
+  mainRenderer = mainWindow.getRenderer();
+  if (mainRenderer == nullptr) {
+    std::cout << "Failed to get mainRenderer from mainWindow.\n";
+    return 1;
+  }
+  nerdRenderer = nerdWindow.getRenderer();
+  if (nerdRenderer == nullptr) {
+    std::cout << "Failed to get nerdRenderer from nerdWindow.\n";
     return 1;
   }
 
-  rocket.loadTexture(renderer);
+  // TextRenderer
+  std::string path = "./sprites/FontBitmap.png";
+  std::string layout[6] = {
+                            "abcdefghijklmnop",
+                            "qrstuvwxyz",
+                            "ABCDEFGHIJKLMNOP",
+                            "QRSTUVWXYZ",
+                            "0123456789",
+                            ".,()+-!: ="
+                          };
+
+  textRenderer.init(nerdRenderer, 
+                    path,
+                    layout,
+                    6, 8, 8);
+  
+  // Rocket
+  rocket.loadTexture(mainRenderer);
 
   return true;
 
@@ -159,19 +213,22 @@ bool setup() {
 
 void cleanUp() {
 
-  w.cleanUp();
+  mainWindow.cleanUp();
   if (cockpit != nullptr) {
     cockpit = nullptr;
   }
-  if (renderer != nullptr) {
-    renderer = nullptr;
+  if (mainRenderer != nullptr) {
+    mainRenderer = nullptr;
   }
+
+  nerdWindow.cleanUp();
 
 }
 
 int main(void) {
 
-  w.setup_SDL();
+  mainWindow.setup_SDL();
+  nerdWindow.setup_SDL();
 
   isRunning = setup();
   gameLoop();

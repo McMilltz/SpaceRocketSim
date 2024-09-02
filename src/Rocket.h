@@ -31,6 +31,7 @@ public:
   void draw(SDL_Renderer* renderer);
 
   Cockpit* getCockpit();
+  Physics* getPhysics();
   int getWidth();
   int getHeight();
 

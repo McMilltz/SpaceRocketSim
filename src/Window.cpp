@@ -34,8 +34,8 @@ int Window::setup_SDL() {
     }
 
     window = SDL_CreateWindow(  "Super insane rocket holy shit", 
-                                SDL_WINDOWPOS_CENTERED, 
-                                SDL_WINDOWPOS_CENTERED,
+                                SDL_WINDOWPOS_UNDEFINED, 
+                                SDL_WINDOWPOS_UNDEFINED,
                                 width,
                                 height,
                                 SDL_WINDOW_BORDERLESS);
@@ -49,12 +49,15 @@ int Window::setup_SDL() {
         cout << "Error on SDL Renderer Creation: " << SDL_GetError() << endl;
         return 1;
     }
+    SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
+
     if(IMG_Init(IMG_INIT_PNG) != IMG_INIT_PNG){
       std::cout << "Error initializing IMG_INIT_PNG.\n";
     }
     return 0;
 
 }
+
 
 void Window::cleanUp() {
 
@@ -74,6 +77,9 @@ void Window::cleanUp() {
 
 SDL_Renderer* Window::getRenderer() {
   return this->renderer;
+}
+SDL_Window* Window::getWindow() {
+  return this->window;
 }
 
 void Window::wait() {

@@ -1,6 +1,10 @@
 #include "RocketPhysics.h"
 #include <cmath>
 
+float Vector2f::magnitude(){
+  return sqrt(pow(x,2)+pow(y,2));
+}
+
 Physics::Physics() : mSpeed(0.0f), mRotSpeed(0.0f), mRotation(0.0f){
   mVelocity = {.x = 0.0f, .y=0.0f};
   mPosition = START_POSITION;
@@ -59,4 +63,11 @@ float Physics::getRotation(){
 }
 float Physics::getSpeed() {
   return mSpeed;
+}
+float Physics::getAngle(Vector2f _v){
+  float result = acos(-_v.y/(_v.magnitude() + 0.00001f));
+  if(_v.x < 0.0f){
+    result *= -1.0f;
+  }
+  return result;
 }
