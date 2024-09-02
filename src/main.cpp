@@ -47,13 +47,13 @@ void processInput() {
             isRunning = false;
           break;
           
-          case SDLK_z:
+          case SDLK_a:
             cockpit->setEnginePressed(0, true);
           break;
           case SDLK_b:
             cockpit->setEnginePressed(1, true);
           break;
-          case SDLK_SLASH:
+          case SDLK_l:
             cockpit->setEnginePressed(2, true);
           break;
           case SDLK_RETURN:
@@ -65,13 +65,13 @@ void processInput() {
       case SDL_KEYUP:
         switch (event.key.keysym.sym) {
           
-          case SDLK_z:
+          case SDLK_a:
             cockpit->setEnginePressed(0, false);
           break;
           case SDLK_b:
             cockpit->setEnginePressed(1, false);
           break;
-          case SDLK_SLASH:
+          case SDLK_l:
             cockpit->setEnginePressed(2, false);
           break;
           case SDLK_RETURN:
