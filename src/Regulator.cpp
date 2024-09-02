@@ -28,12 +28,6 @@ void Regulator::calculateTranslation(){
   optVelocity.y = starDist.y * v_opt;
 
   optAcceleration = optVelocity - mVelocity;
-<<<<<<< HEAD
-  // std::cout << "optAcc: ";
-  // optAcceleration.print();
-=======
-  optAcceleration.print();
->>>>>>> Physics
 }
 
 void Regulator::calculateTargetAngle(){
@@ -41,11 +35,6 @@ void Regulator::calculateTargetAngle(){
   if(starDist.x < 0){
     phi_0 *= -1.0f;
   }
-<<<<<<< HEAD
-  // std::cout << "phi_0: " << phi_0 << "\n";
-=======
->>>>>>> Physics
-  
 }
 
 bool Regulator::calculateOvershootAngle(){
