@@ -37,7 +37,12 @@ void Rocket::update(float deltaTime) {
 
   cockpit.updateEngines(deltaTime);
   physics.setThruster(cockpit.getEngines());
-  physics.update(deltaTime);
+  if(true){
+    physics.update(deltaTime);
+  }else{
+    physics.Physics::update(deltatime);
+  }
+  // physics.update(deltaTime);
   geometry.x = physics.getX() - width/2.0f;
   geometry.y = physics.getY() - height/2.0f;
 
