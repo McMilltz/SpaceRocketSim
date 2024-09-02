@@ -13,8 +13,8 @@ class Rocket {
 
 private:
   Cockpit cockpit;
-  Physics physics;
-  // Regulator physics;
+  // Physics physics;
+  Regulator physics;
   int width;
   int height;
   SDL_Rect geometry;
@@ -28,6 +28,8 @@ public:
   Rocket();
 
   void setEnginePressed(int index, bool value);
+  void setTargetPosition(int x, int y);
+  void toggleAutopilot();
   void update(float deltaTime);
   void getCoordinates(float& x, float& y);
   void draw(SDL_Renderer* renderer);

@@ -9,6 +9,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_events.h>
 #include <SDL2/SDL_keycode.h>
+#include <SDL2/SDL_rect.h>
 #include <SDL2/SDL_render.h>
 #include <SDL2/SDL_timer.h>
 #include <SDL2/SDL_video.h>
@@ -97,10 +98,8 @@ bool checkForScoreCollision() {
   float rocketY;
   rocket.getCoordinates(rocketX, rocketY);
   
-  float dX = score.getHitbox().x + score.getHitbox().w - 
-    rocketX;
-  float dY = score.getHitbox().y + score.getHitbox().h - 
-    rocketY;
+  float dX = score.getX() - rocketX;
+  float dY = score.getY() - rocketY;
 
   return ((sqrt(pow(dX, 2) + pow(dY, 2))) < 
       ((rocket.getWidth() + rocket.getHeight()) / 4.0f + 
@@ -112,8 +111,10 @@ void updateSimulation() {
 
   rocket.update(deltaTime);
   if (checkForScoreCollision()) {
-    score.setToRandomLocation();
-    //TODO: increase player score
+    int x;
+    int y;
+    score.setToRandomLocation(x, y);
+    rocket.setTargetPosition(x, y);
   }
 
 }
@@ -179,7 +180,10 @@ bool setup() {
   }
 
   // Score
-  score.setToRandomLocation();
+  int x;
+  int y;
+  score.setToRandomLocation(x, y);
+  rocket.setTargetPosition(x, y);
 
   // Renderer
   mainRenderer = mainWindow.getRenderer();

@@ -20,6 +20,13 @@ Rocket::Rocket() : physics() {
   compass.y = 20;
 }
 
+void Rocket::setTargetPosition(int x, int y) {
+  physics.setStarPosition(x, y);
+}
+void Rocket::toggleAutopilot(){
+  physics.toggleAutopilot();
+}
+
 void Rocket::loadTexture(SDL_Renderer* renderer){
   std::string file = SPRITE_DIR"R";
   std::string completedFile = file;
@@ -40,7 +47,7 @@ void Rocket::update(float deltaTime) {
   if(true){
     physics.update(deltaTime);
   }else{
-    physics.Physics::update(deltatime);
+    physics.Physics::update(deltaTime);
   }
   // physics.update(deltaTime);
   geometry.x = physics.getX() - width/2.0f;
