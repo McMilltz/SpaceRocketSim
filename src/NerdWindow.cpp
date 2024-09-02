@@ -58,12 +58,9 @@ void NerdWindow::drawVelocityInformation(SDL_Renderer* renderer,
   };
   SDL_RenderFillRect(renderer, &centerPoint);
 
-  std::cout << "Angle: " << angle << ".\n";
 
   int xDir = SPEED_GRAPH_START_X + SPEED_GRAPH_POINTER_SIZE * sin(angle);
   int yDir = SPEED_GRAPH_START_Y - SPEED_GRAPH_POINTER_SIZE * cos(angle);
-
-  std::cout << "xDir: " << xDir << ", yDir: " << yDir << "\n";
 
   SDL_RenderDrawLine(renderer, 
                      SPEED_GRAPH_START_X, 

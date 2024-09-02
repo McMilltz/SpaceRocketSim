@@ -50,6 +50,18 @@ void Physics::setThruster(float* _t){
   } 
 }
 
+int Physics::getEngineBitMask(){
+  int result = 0;
+  for(int it=0; it < AMOUNT_OF_ENGINES; it++){
+    if(mEngines[it] > 0.0f){
+      result += pow(2, it);
+    }
+  }
+  
+  return result;
+
+}
+
  
 float Physics::getRotSpeed(){
   return mRotSpeed;

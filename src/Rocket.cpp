@@ -67,7 +67,7 @@ void Rocket::getCoordinates(float& x, float& y) {
 
 void Rocket::draw(SDL_Renderer* renderer) {
 
-  int spriteIndex = cockpit.getEngineBitMask();
+  int spriteIndex = physics.getEngineBitMask();
   SDL_RenderCopyEx(renderer, texture[spriteIndex], NULL, 
                    &geometry, physics.getRotation_deg(), 
                    NULL, SDL_FLIP_HORIZONTAL);

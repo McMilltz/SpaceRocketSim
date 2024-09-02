@@ -17,13 +17,14 @@ typedef struct Vector2f{
 
 class Physics{
   public:
-    const float LEVER[AMOUNT_OF_ENGINES] = {80, 1.5, -1.5, -80};
+    const float LEVER[AMOUNT_OF_ENGINES] = {40, 1.5, -1.5, -40};
     const float THRUST[AMOUNT_OF_ENGINES] = {5, 25, 25, 5};
 
   public:
         Physics();
   virtual void update(float _dt);
   void setThruster(float* _t);
+  int getEngineBitMask();
 
   float getRotSpeed();
   Vector2f getVelocity();

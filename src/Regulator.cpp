@@ -28,7 +28,6 @@ void Regulator::calculateTranslation(){
   optVelocity.y = starDist.y * v_opt;
 
   optAcceleration = optVelocity - mVelocity;
-  std::cout << "optAcc: ";
   optAcceleration.print();
 }
 
@@ -37,7 +36,6 @@ void Regulator::calculateTargetAngle(){
   if(starDist.x < 0){
     phi_0 *= -1.0f;
   }
-  std::cout << "phi_0: " << phi_0 << "\n";
   
 }
 
@@ -68,7 +66,6 @@ bool Regulator::calculateOvershootAngle(){
     float G = delta + sqrt(-2.0f * delta * d_phi_crit) - M_PI;
     // OmG = M_PI < delta + sqrt(-2.0f * delta * d_phi_crit);
     OmG = G > 0.0f;
-    // std::cout << "d_phi_2: " << (int)d_phi_2 << "d_phi_crit: " << (int)d_phi_crit << " , d_phi_1: " << (int)d_phi_1 << " , delta: " << (int)delta << ".\n";
 
   }
   else{
@@ -86,9 +83,7 @@ bool Regulator::calculateOvershootAngle(){
     float G = delta + sqrt(2.0f * delta * d_phi_crit) - M_PI;
     OmG = G > 0.0f;
     // OmG = M_PI < delta + sqrt(2.0f * delta * d_phi_crit);
-    // std::cout << "d_phi_1: " << (int)d_phi_1 << " , d_phi_crit: " << (int)d_phi_crit << " , d_phi_2: " << (int)d_phi_2 << " , delta: " << (int)delta << ".\n";
   }
-  // std::cout << "mRotSpeed: " << mRotSpeed << " , 2PI: " << N_2PI << ".\n"; 
   return OmG;
 
 }
@@ -97,11 +92,9 @@ void Regulator::regulateEngines(){
   if(ang_acc >= 0.5f){
     mEngines[0] = 1.0f;
     mEngines[AMOUNT_OF_ENGINES - 1] = 0.0f;
-    // std::cout << "turn right.\n";
   }else if(ang_acc <= -0.5f){
     mEngines[0] = 0.0f;
     mEngines[AMOUNT_OF_ENGINES - 1] = 1.0f;
-    // std::cout << "turn left.\n";
   } 
   d_phi -= ((int)(d_phi/N_2PI)) * N_2PI;
   if(d_phi > M_PI){
@@ -109,9 +102,7 @@ void Regulator::regulateEngines(){
   }else if (d_phi < -M_PI) {
     d_phi += N_2PI;
   }
-  std::cout << "d_phi: " << d_phi << "\n";
   if(abs(d_phi) < 1.3f){//Pi/6
-    std::cout << "main thruster activated.\n";
     float thr = 1.0f - (abs(d_phi)/1.3f);
     mEngines[1] = thr;
     mEngines[2] = thr;
