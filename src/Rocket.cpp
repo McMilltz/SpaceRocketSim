@@ -81,13 +81,6 @@ void Rocket::draw(SDL_Renderer* renderer) {
                      physics.getX(), physics.getY(), 
                      WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
 
-
-  int distance = sqrt(pow(physics.getX() - WINDOW_WIDTH / 2, 2) + 
-                      pow(physics.getY() - WINDOW_HEIGHT / 2, 2));
-  std::cout << "Distance: " << distance << "\t";
-
-  std::cout << "Speed: " << (int) physics.getSpeed() << "\n";
-
 }
 
 Cockpit* Rocket::getCockpit() {

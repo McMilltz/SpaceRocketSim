@@ -143,6 +143,16 @@ void render() {
                                      ph->getSpeed(),
                                      ph->getAngle(ph->getVelocity()));
 
+  nerdWindow.drawDistanceInformation(&textRenderer,
+                                     ph->getX(), 
+                                     ph->getY(), 
+                                     score.getX(), 
+                                     score.getY());
+  nerdWindow.drawDistanceMap(WINDOW_WIDTH / 2, 
+                             WINDOW_HEIGHT / 2,
+                             ph->getX(),
+                             ph->getY());
+  
   SDL_RenderPresent(nerdRenderer);
 
 }
@@ -172,6 +182,7 @@ bool setup() {
   // Windows
   SDL_SetWindowPosition(mainWindow.getWindow(), MAIN_WINDOW_POSITION);
   SDL_SetWindowPosition(nerdWindow.getWindow(), NERD_WINDOW_POSITION);
+  nerdWindow.loadImages();
 
   // Cockpit
   cockpit = rocket.getCockpit();

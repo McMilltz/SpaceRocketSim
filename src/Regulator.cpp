@@ -28,8 +28,8 @@ void Regulator::calculateTranslation(){
   optVelocity.y = starDist.y * v_opt;
 
   optAcceleration = optVelocity - mVelocity;
-  std::cout << "optAcc: ";
-  optAcceleration.print();
+  // std::cout << "optAcc: ";
+  // optAcceleration.print();
 }
 
 void Regulator::calculateTargetAngle(){
@@ -37,7 +37,7 @@ void Regulator::calculateTargetAngle(){
   if(starDist.x < 0){
     phi_0 *= -1.0f;
   }
-  std::cout << "phi_0: " << phi_0 << "\n";
+  // std::cout << "phi_0: " << phi_0 << "\n";
   
 }
 
@@ -109,9 +109,9 @@ void Regulator::regulateEngines(){
   }else if (d_phi < -M_PI) {
     d_phi += N_2PI;
   }
-  std::cout << "d_phi: " << d_phi << "\n";
+  // std::cout << "d_phi: " << d_phi << "\n";
   if(abs(d_phi) < 1.3f){//Pi/6
-    std::cout << "main thruster activated.\n";
+    // std::cout << "main thruster activated.\n";
     float thr = 1.0f - (abs(d_phi)/1.3f);
     mEngines[1] = thr;
     mEngines[2] = thr;

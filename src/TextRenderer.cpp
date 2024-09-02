@@ -20,8 +20,6 @@ void TextRenderer::init(SDL_Renderer* renderer,
   this->charWidth = charWidth;
   this->charHeight = charHeight;
 
-  std::cout << "renderer: " << renderer << "\n";
-
   loadBitmap(renderer);
   
 
