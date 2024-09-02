@@ -20,7 +20,7 @@ class Physics{
     const float LEVER[AMOUNT_OF_ENGINES] = {40, 1.5, -1.5, -40};
     const float THRUST[AMOUNT_OF_ENGINES] = {5, 25, 25, 5};
 
-  public:
+public:
         Physics();
   virtual void update(float _dt);
   void setThruster(float* _t);
@@ -34,6 +34,7 @@ class Physics{
   float getRotation();
   float getSpeed();
   float getAngle(Vector2f _v);
+  float* getEngines();
 
 
   public:

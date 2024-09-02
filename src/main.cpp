@@ -134,10 +134,10 @@ void render() {
   SDL_SetRenderDrawColor(nerdRenderer, NERD_BACKGROUND_COLOR);
   SDL_RenderClear(nerdRenderer);
 
-  nerdWindow.drawEnginePower(nerdRenderer,
-                             cockpit->getEngines());
-
   Physics* ph = rocket.getPhysics();
+  nerdWindow.drawEnginePower(nerdRenderer,
+                             ph->getEngines());
+
   nerdWindow.drawVelocityInformation(nerdRenderer,
                                      &textRenderer, 
                                      ph->getSpeed(),

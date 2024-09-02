@@ -93,3 +93,6 @@ float Physics::getAngle(Vector2f _v){
   }
   return result;
 }
+float* Physics::getEngines(){
+  return &mEngines[0];
+}
