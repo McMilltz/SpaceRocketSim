@@ -58,6 +58,11 @@ void processInput() {
           break;
           case SDLK_RETURN:
             cockpit->setEnginePressed(3, true);
+          break;
+
+          case SDLK_SPACE:
+            rocket.toggleAutopilot();
+          break;
 
         }
       break;
