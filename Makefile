@@ -8,7 +8,7 @@ LINK_IMG = -lSDL2_image
 LINKS = $(LINK_SDL) $(LINK_MATH) $(LINK_IMG)
 
 SRC_DIR = ./src
-SRCS = $(wildcard $(SRC_DIR)/*.cpp)
+SRCS = $(wildcard $(SRC_DIR)/*.cpp) $(wildcard $(SRC_DIR)/*.hpp)
 
 
 all: $(SRCS)

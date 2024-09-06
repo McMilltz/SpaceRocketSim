@@ -1,6 +1,7 @@
 #include <math.h>
 #include "constants.h"
 #include <iostream>
+#include "Gizmos.h"
 
 typedef struct Vector2f{
   float x;
@@ -22,6 +23,7 @@ class Physics{
 
 public:
         Physics();
+      ~Physics();
   virtual void update(float _dt);
   void setThruster(float* _t);
   int getEngineBitMask();

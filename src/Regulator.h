@@ -4,6 +4,7 @@ class Regulator : public Physics{
   
   public:
         Regulator();
+        ~Regulator();
   void update(float _dt) override;
   void setStarPosition(float _x, float _y);
   void toggleAutopilot();

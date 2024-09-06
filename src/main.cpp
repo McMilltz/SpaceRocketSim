@@ -128,6 +128,8 @@ void render() {
   score.draw(mainRenderer);
   rocket.draw(mainRenderer);
 
+  Gizmos::drawAll(mainRenderer);
+
   SDL_RenderPresent(mainRenderer);
 
   // Nerd Window
@@ -242,7 +244,7 @@ void cleanUp() {
   }
 
   nerdWindow.cleanUp();
-
+  Gizmos::clear();//delete all DrawRequests in heap
 }
 
 int main(void) {

@@ -1,6 +1,7 @@
 #include "RocketPhysics.h"
 #include <cmath>
 #include <SDL2/SDL.h>
+#include <memory>
 
 float Vector2f::magnitude(){
   return sqrt(pow(x, 2) + pow(y, 2));
@@ -21,6 +22,12 @@ Physics::Physics() : mSpeed(0.0f), mRotSpeed(0.0f), mRotation(0.0f){
   for(int it = 0; it < AMOUNT_OF_ENGINES; it++)
     mEngines[it] = 0.0f;
 
+  DrawLineRequest<float>* d = new DrawLineRequest<float>(&mPosition.x,&mPosition.y,&mVelocity.x,&mVelocity.y,DrawLineRequest<float>::Type::Direction);
+  ((DrawLineRequest<float>*)d)->setColor(0, 255, 0, 255);
+  Gizmos::addRequest("Velocity", d);
+}
+Physics::~Physics(){
+  Gizmos::remove("Velocity");
 }
 
 void Physics::update(float _dt){
@@ -41,6 +48,8 @@ void Physics::update(float _dt){
   mPosition.y += mVelocity.y * _dt;
 
   mSpeed = sqrt(pow(mVelocity.x, 2) + pow(mVelocity.y, 2));
+
+  
 
 }
 

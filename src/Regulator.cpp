@@ -1,9 +1,23 @@
 #include "Regulator.h"
 #include <SDL2/SDL_mouse.h>
+#include <SDL2/SDL_pixels.h>
 #include <cmath>
 
 Regulator::Regulator(){
   mStarPosition = {.x = 750, .y = 300};
+  // DrawRequest* d = new DrawLineRequest<float>(&mPosition.x,&mPosition.y,&optAcceleration.x,&optAcceleration.y,DrawLineRequest<float>::Type::Direction);
+  // Gizmos::addRequest("optAcceleration", d);
+  DrawRequest* d = new DrawLineRequest<float>(&mPosition.x,&mPosition.y,&optVelocity.x,&optVelocity.y,DrawLineRequest<float>::Type::Direction);
+  ((DrawLineRequest<float>*)d)->setColor(255, 0, 0, 255);
+  Gizmos::addRequest("optVelocity", d);
+
+}
+Regulator::~Regulator(){
+  Physics::~Physics();
+  //clear other Gizmos
+  Gizmos::remove("optAcceleration");
+  Gizmos::remove("optVelocity");
+  
 }
 
 void Regulator::setStarPosition(float _x, float _y){
