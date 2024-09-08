@@ -19,9 +19,9 @@ void Vector2f::print(){
 Physics::Physics() : mSpeed(0.0f), mRotSpeed(0.0f), mRotation(0.0f){
   mVelocity = {.x = 0.0f, .y=0.0f};
   mPosition = START_POSITION;
-  for(int it = 0; it < AMOUNT_OF_ENGINES; it++)
+  for(int it = 0; it < AMOUNT_OF_ENGINES; it++){
     mEngines[it] = 0.0f;
-
+}
   DrawLineRequest<float>* d = new DrawLineRequest<float>(&mPosition.x,&mPosition.y,&mVelocity.x,&mVelocity.y,DrawLineRequest<float>::Type::Direction);
   ((DrawLineRequest<float>*)d)->setColor(0, 255, 0, 255);
   Gizmos::addRequest("Velocity", d);

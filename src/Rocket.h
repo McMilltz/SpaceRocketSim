@@ -1,8 +1,6 @@
 #include "Cockpit.h"
 // #include "RocketPhysics.h"
 #include "Regulator.h"
-#include "NNPhysics.h"
-#include <iostream>
 #include <SDL2/SDL_render.h>
 #include <SDL2/SDL_image.h>
 
@@ -15,8 +13,7 @@ class Rocket {
 private:
   Cockpit cockpit;
   // Physics physics;
-  // Regulator physics;
-  NNPhysics physics;
+  Regulator physics;
   int width;
   int height;
   SDL_Rect geometry;
