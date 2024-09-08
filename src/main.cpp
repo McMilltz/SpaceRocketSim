@@ -18,6 +18,15 @@
 // #include <iostream>
 #include "Game.h"
 
+int main(void) {
+  //see previous main method at the end of the file
+  {
+    Game game;
+    game.run();
+  }
+  return EXIT_SUCCESS;
+}
+
 // Rocket rocket;
 // Cockpit* cockpit = nullptr;
 // Score score(50, 50);
@@ -248,18 +257,18 @@
 //   Gizmos::clear();//delete all DrawRequests in heap
 // }
 
-int main(void) {
-
-  // mainWindow.setup_SDL();
-  // nerdWindow.setup_SDL();
-  //
-  // isRunning = setup();
-  // gameLoop();
-  //
-  // cleanUp();
-  {
-    Game game;
-    game.run();
-  }
-  return EXIT_SUCCESS;
-}
+// int main(void) {
+//
+//   // mainWindow.setup_SDL();
+//   // nerdWindow.setup_SDL();
+//   //
+//   // isRunning = setup();
+//   // gameLoop();
+//   //
+//   // cleanUp();
+//   {
+//     Game game;
+//     game.run();
+//   }
+//   return EXIT_SUCCESS;
+// }

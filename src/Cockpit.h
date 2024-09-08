@@ -4,7 +4,8 @@
 #include "constants.h"
 
 class Cockpit {
-
+public:
+  Cockpit();
 private:
   float engines[AMOUNT_OF_ENGINES];
   bool input[AMOUNT_OF_ENGINES];

@@ -5,13 +5,12 @@
 
 Regulator::Regulator(){
   mStarPosition = {.x = 750, .y = 300};
-  active = true;
+  active = false;
   // DrawRequest* d = new DrawLineRequest<float>(&mPosition.x,&mPosition.y,&optAcceleration.x,&optAcceleration.y,DrawLineRequest<float>::Type::Direction);
   // Gizmos::addRequest("optAcceleration", d);
   DrawRequest* d = new DrawLineRequest<float>(&mPosition.x,&mPosition.y,&optVelocity.x,&optVelocity.y,DrawLineRequest<float>::Type::Direction);
   ((DrawLineRequest<float>*)d)->setColor(255, 0, 0, 255);
   Gizmos::addRequest("optVelocity", d);
-
 }
 Regulator::~Regulator(){
   Physics::~Physics();
@@ -27,7 +26,6 @@ void Regulator::setStarPosition(float _x, float _y){
 
 void Regulator::toggleAutopilot(){
   active = !active;
-  std::cout << "Autopilot is now " << (active ? "active" : "inactive")<< ".\n";
 }
 
 void Regulator::calculateTranslation(){
@@ -130,7 +128,6 @@ void Regulator::regulateEngines(){
 
 void Regulator::update(float _dt){
   if(active){
-    std::cout << "Regulator update.\n";
     calculateTranslation();
     calculateTargetAngle();
     bool OmG = calculateOvershootAngle();

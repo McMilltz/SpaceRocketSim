@@ -2,6 +2,12 @@
 #include <cmath>
 #include <cstdio>
 
+Cockpit::Cockpit(){
+  for (int it=0; it < AMOUNT_OF_ENGINES; it++) {
+    engines[it] = 0.0;
+    input[it] = false;
+  }
+}
 
 void Cockpit::updateEngines(float delta_time) {
 

@@ -48,9 +48,6 @@ void Physics::update(float _dt){
   mPosition.y += mVelocity.y * _dt;
 
   mSpeed = sqrt(pow(mVelocity.x, 2) + pow(mVelocity.y, 2));
-
-  
-
 }
 
 void Physics::setThruster(float* _t){
