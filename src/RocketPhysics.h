@@ -1,3 +1,6 @@
+#ifndef ROCKETPHYSICS_H
+#define ROCKETPHYSICS_H
+
 #include <math.h>
 #include "constants.h"
 #include <iostream>
@@ -52,3 +55,5 @@ public:
     float     mEngines[AMOUNT_OF_ENGINES];
 
 };
+
+#endif
