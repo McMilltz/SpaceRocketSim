@@ -1,4 +1,4 @@
-#include "RocketPhysics.h"
+#include "../Rocket/RocketPhysics.h"
 #include "NeuralNet.h"
 
 class NNPhysics : public Physics {

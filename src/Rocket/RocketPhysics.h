@@ -1,19 +1,11 @@
 #ifndef ROCKETPHYSICS_H
 #define ROCKETPHYSICS_H
 
-#include <math.h>
-#include "constants.h"
-#include <iostream>
-#include "Gizmos.h"
-
-typedef struct Vector2f{
-  float x;
-  float y;
-  float magnitude();
-  void print();
-  Vector2f operator-(Vector2f& _other);
-  Vector2f operator*(float _f);
-} Vector2f;
+#include "../constants.h"
+#include "../Vector2.hpp"
+#include "../UI/Gizmos.h"
+#include <cmath>
+#include <SDL2/SDL.h>
 
 #define AMOUNT_OF_ENGINES 4
 #define START_POSITION {.x = WINDOW_WIDTH / 2, \

@@ -1,7 +1,7 @@
 #ifndef COCKPIT_H
 #define COCKPIT_H
 
-#include "constants.h"
+#include "../constants.h"
 
 class Cockpit {
 public:

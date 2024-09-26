@@ -1,7 +1,6 @@
 #include "DrawRequest.hpp"
 #include <algorithm>
 #include <map>
-#include <iostream>
 
 class Gizmos{
 public:

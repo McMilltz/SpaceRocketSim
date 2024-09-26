@@ -55,4 +55,12 @@ void Layer::NL_FUNC(double& _in_value){
   _in_value = std::atan(_in_value) / M_PI;
 }
 
+double* Layer::getWeight(int _idx){
+  if(_idx < size){
+    return &weightMatrix[_idx];
+  }else{
+    std::cout << "Error in Layer::getWeight. Weight idx not in range.\n";
+    return nullptr;
+  }
+}
 

@@ -1,6 +1,6 @@
 #include "Window.h"
 #include "TextRenderer.h"
-#include "constants.h"
+#include "../constants.h"
 #include <SDL2/SDL_surface.h>
 
 #ifndef NERDWINDOW_H

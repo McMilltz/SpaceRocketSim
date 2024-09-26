@@ -1,20 +1,4 @@
 #include "RocketPhysics.h"
-#include <cmath>
-#include <SDL2/SDL.h>
-#include <memory>
-
-float Vector2f::magnitude(){
-  return sqrt(pow(x, 2) + pow(y, 2));
-}
-Vector2f Vector2f::operator-(Vector2f& _other){
-  return {.x = x - _other.x, .y = y - _other.y};
-}
-Vector2f Vector2f::operator*(float _f){
-  return {.x = _f * x, .y = _f * y};
-}
-void Vector2f::print(){
-  std::cout << "x: " << (int)x << ", y: " << (int)y << "\n";
-}
 
 Physics::Physics() : mSpeed(0.0f), mRotSpeed(0.0f), mRotation(0.0f){
   mVelocity = {.x = 0.0f, .y=0.0f};

@@ -9,7 +9,6 @@ Window::Window(int width, int height) {
 
     this->width = width;
     this->height = height;
-
 }
 
 Window::~Window() {

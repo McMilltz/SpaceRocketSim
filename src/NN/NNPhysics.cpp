@@ -22,7 +22,7 @@ void NNPhysics::update(float _dt){
   Brain.calculate();
   Brain.printOutput();
 
-
+  Physics::setThruster(Brain.getResult());
   Physics::update(_dt);
 }
 

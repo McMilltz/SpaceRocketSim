@@ -1,4 +1,4 @@
-#include "iostream"
+#include <iostream>
 
 class Layer{
 public:
@@ -8,6 +8,7 @@ public:
   void init(int _size, Layer* _nextLayer, int _nextSize);
   int getSize();
   double* calculateNN_recursive(double* _input);
+  double* getWeight(int _idx);
   
 private:
   int size;

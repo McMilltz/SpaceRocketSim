@@ -1,10 +1,10 @@
-#include "Window.h"
-#include "NerdWindow.h"
+#include "UI/Window.h"
+#include "UI/NerdWindow.h"
 #include "constants.h"
-#include "Rocket.h"
-#include "Cockpit.h"
+#include "Rocket/Rocket.h"
+#include "Rocket/Cockpit.h"
 #include "Score.h"
-#include "TextRenderer.h"
+#include "UI/TextRenderer.h"
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_events.h>
