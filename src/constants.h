@@ -4,6 +4,14 @@
 #define ROCKET_HEIGHT 60
 #define COMPASS_WIDTH 40
 #define COMPASS_HEIGHT 40
+#define SCORE_SIZE 50
+#define MAX_SCORE_DISTANCE 55
+#define SCORE_REWARD 10000.0f
+#define START_POSITION {.x = WINDOW_WIDTH / 2, \
+                        .y = WINDOW_HEIGHT / 2}
+#define ROCKET_COUNT 4
+#define J_ENGINE 0
+#define J_ROT_SPEED 1.0f
 
 #define FPS 60
 #define IMAGE_DURATION (1000 / FPS)

@@ -8,17 +8,17 @@
 #include <SDL2/SDL.h>
 
 #define AMOUNT_OF_ENGINES 4
-#define START_POSITION {.x = WINDOW_WIDTH / 2, \
-                        .y = WINDOW_HEIGHT / 2}
 
 class Physics{
   public:
     const float LEVER[AMOUNT_OF_ENGINES] = {40, 1.5, -1.5, -40};
     const float THRUST[AMOUNT_OF_ENGINES] = {5, 25, 25, 5};
-
+    const float _1_CRIT_ACC = 1.0f / (THRUST[0]*2.0f);
+    const float _1_CRIT_TORQUE = 1.0f / (THRUST[0] * LEVER[0]);
 public:
         Physics();
       ~Physics();
+  virtual void resetToStart();
   virtual void update(float _dt);
   void setThruster(float* _t);
   int getEngineBitMask();

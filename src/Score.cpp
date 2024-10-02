@@ -4,12 +4,29 @@
 #include <cstdlib>
 #include <ctime>
 
+Score* Score::instance = nullptr;
+
 Score::Score(int width, int height) {
 
   srand((unsigned) time(NULL));
   this->hitbox.w = width;
   this->hitbox.h = height;
 
+  if(instance == nullptr){
+    instance = this;
+  }
+
+}
+Score::~Score(){
+  if(instance == this){
+    instance = nullptr;
+  }
+}
+void Score::setPosition(Vector2f* _pos){
+  x = _pos->x;
+  y = _pos->y;
+  hitbox.x = x - hitbox.w / 2;
+  hitbox.y = y - hitbox.h / 2;
 }
 
 /**

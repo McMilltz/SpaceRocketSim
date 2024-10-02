@@ -1,7 +1,7 @@
 #include "Game.h"
 
 Game::Game() 
-  : score(50, 50)
+  : score(SCORE_SIZE, SCORE_SIZE)
   , mainWindow(WINDOW_WIDTH, WINDOW_HEIGHT)
   , nerdWindow(NERD_WINDOW_WIDTH, NERD_WINDOW_HEIGHT)
 {

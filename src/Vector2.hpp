@@ -1,6 +1,7 @@
 #ifndef VECTOR2_H
 #define VECTOR2_H
 
+#include <cmath>
 #include <math.h>
 #include <iostream>
 
@@ -18,6 +19,12 @@ typedef struct Vector2f{
   }
   Vector2f operator*(float _f){
     return {.x = _f * x, .y = _f * y};
+  }
+  float angle(){
+    float result = acos(-y/magnitude());
+    if(x < 0)
+      result *= -1.0f;
+    return result;
   }
 } Vector2f;
 

@@ -17,12 +17,33 @@
 // #include <cstdlib>
 // #include <iostream>
 #include "Game.h"
+#include "NN/LearningManager.h"
 
 int main(void) {
   //see previous main method at the end of the file
   {
-    Game game;
-    game.run();
+   // Game game;
+    // game.run();
+    LearningManager LM;
+    std::string file = "RocketBrain.csv";
+    std::string file2 = "RocketBrain2.csv";
+    LM.init();
+    LM.loadFromFile(file, 0);
+    std::cout << "loading complete.\n";
+    for (int it=0; it < 5; it++) {
+      // LM.startGo();
+      LM.run_and_show();
+      for (int jl=0; jl < 20; jl++) {
+        LM.startGo();
+      }
+      // LM.run_and_show();
+    }
+
+    // std::cin.get();
+    //
+    LM.safe(file, 0);
+    LM.safe(file2, 1);
+    // LM.loadFromFile(file, 0);
   }
   return EXIT_SUCCESS;
 }
