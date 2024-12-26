@@ -18,6 +18,7 @@
 // #include <iostream>
 #include "Game.h"
 #include "NN/LearningManager.h"
+#include "Rocket/RocketPhysics.h"
 
 int main(void) {
   //see previous main method at the end of the file
@@ -29,18 +30,21 @@ int main(void) {
     std::string file2 = "RocketBrain2.csv";
     LM.init();
     LM.loadFromFile(file, 0);
+    LM.loadFromFile(file2, 1);
     std::cout << "loading complete.\n";
+    LM.run_and_show();
     for (int it=0; it < 5; it++) {
-      // LM.startGo();
-      LM.run_and_show();
-      for (int jl=0; jl < 20; jl++) {
+      for (int jl=0; jl < 40; jl++) {
         LM.startGo();
       }
       // LM.run_and_show();
+      LM.sortByScore();
+      for(int s=3; s < ROCKET_COUNT; s++)
+          LM.init(s);
     }
+    LM.run_and_show();
+    LM.sortByScore();
 
-    // std::cin.get();
-    //
     LM.safe(file, 0);
     LM.safe(file2, 1);
     // LM.loadFromFile(file, 0);

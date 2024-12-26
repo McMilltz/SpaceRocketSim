@@ -5,8 +5,8 @@
 #include <SDL2/SDL_render.h>
 #include <SDL2/SDL_image.h>
 
-#define VARY_WEIGHT_COUNT 5
-#define VARIANTS 11
+#define VARY_WEIGHT_COUNT 7
+#define VARIANTS 15
 
 class NNRocket{
 
@@ -23,10 +23,11 @@ public:
 
   void  setStarPositionVector(std::vector<Vector2f>* _track);
   void  update(float _dt);
+  float getScoreResult();
 
-  void printScoreResults();
   void safe(std::string& _filename);
   void loadFromFile(std::string& _filename);
+  void copyFrom(NNRocket* _source);
 
   void draw(SDL_Renderer* _renderer);
   void loadTexture(SDL_Renderer* _renderer);
@@ -36,6 +37,7 @@ private:
   std::vector<Vector2f>*  starPositionVector;
   int       weightCount;
   int       modifyIndizes[VARY_WEIGHT_COUNT];
+  float     J0;
 
 private:
   int width;

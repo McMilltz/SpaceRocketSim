@@ -30,6 +30,14 @@ void LearningManager::init(){
   // std::cout << "[LM] Rocket initialized.\n";
   // std::cout << "[LM] Star Position set. Finish init method.\n";
 }
+void LearningManager::init(int _rocketIdx){
+  if(_rocketIdx >= ROCKET_COUNT || _rocketIdx < 0){
+    std::cout << "[LM]init(int) _rocketIdx " << _rocketIdx << " not in range.\n";
+    return;
+  }
+  rocket[_rocketIdx].init();
+  rocket[_rocketIdx].setStarPositionVector(&track);
+}
 
 void LearningManager::startGo(){
   float time = 0.0f;
@@ -46,7 +54,6 @@ void LearningManager::startGo(){
     // std::cout << "Time: " << time << "\t";
   }
   for (int it=0; it < ROCKET_COUNT; it++) {
-    rocket[it].printScoreResults();
     rocket[it].finishGo();
   }
 }
@@ -88,8 +95,34 @@ void LearningManager::run_and_show(){
   }
   // std::cout << "[LM]run_and_show end loop.\n";
   for (int it=0; it < ROCKET_COUNT; it++) {
-    rocket[it].printScoreResults();
     rocket[it].finishGo();
+  }
+}
+
+void LearningManager::sortByScore(){
+  int sortIdx[ROCKET_COUNT];
+  float scores[ROCKET_COUNT];
+  for(int it=0;it<ROCKET_COUNT;it++)
+    scores[it] = rocket[it].getScoreResult();
+
+  float minScore;
+  int minIdx = 0;
+  NNRocket tempNNR;
+
+  for(int placement=0; placement<ROCKET_COUNT; placement++){
+    minScore = 1000000.0f;
+    minIdx = placement;
+    for(int rIt=placement; rIt < ROCKET_COUNT; rIt++){
+      if(scores[rIt]<minScore){
+        minIdx = rIt;
+        minScore = scores[rIt];
+      }
+    }
+    sortIdx[placement] = minIdx;
+    tempNNR.copyFrom(&rocket[placement]);
+    rocket[placement].copyFrom(&rocket[minIdx]);
+    rocket[minIdx].copyFrom(&tempNNR);
+    std::cout << "placement " << placement << " is rocket " << minIdx << "\n";
   }
 }
 

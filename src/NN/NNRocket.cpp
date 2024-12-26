@@ -3,7 +3,7 @@
 #include <cstdlib>
 #include <vector>
 
-NNRocket::NNRocket() : physics()
+NNRocket::NNRocket() : physics(), J0(0.0f)
 {
   weightCount = physics[0].getWeightCount();
   // std::cout << "[NNR]constructor. weightCount: " << weightCount << "\n";
@@ -27,7 +27,14 @@ void NNRocket::init(){
 
 void NNRocket::loadFromFile(std::string& _filename){
   physics[0].loadFromFile(_filename);
-  for(int it=0; it < VARIANTS; it++){
+  for(int it=1; it < VARIANTS; it++){
+    physics[it].copyWeights(&physics[0]);
+  }
+  weightCount = physics[0].getWeightCount();
+}
+void NNRocket::copyFrom(NNRocket* _source){
+  physics[0].copyWeights(&(_source->physics[0]));
+  for(int it=1; it < VARIANTS; it++){
     physics[it].copyWeights(&physics[0]);
   }
   weightCount = physics[0].getWeightCount();
@@ -62,7 +69,7 @@ void NNRocket::prepareGo(){
   }
 }
 void NNRocket::finishGo(){
-  float J0 = physics[0].getJ_err();
+  J0 = physics[0].getJ_err();
   // std::cout << "[NNR] begin finishGo().\n";
   for (int it=1; it <= VARY_WEIGHT_COUNT; it++) {
     float dJ1 = physics[it].getJ_err() - J0;
@@ -98,15 +105,8 @@ void NNRocket::update(float _dt){
   // std::cout << "J[0]: " << physics[0].getJ_err() << ".\n";
 }
 
-void NNRocket::printScoreResults(){
-  // std::cout << "\n ------------- \n Score Results: \n\n";
-  // for (int it=0; it < VARIANTS; it++){
-    // std::cout << "J[" << it << "] : " << physics[it].getJ_err() << ".\n";
-  // }
-  // std::cout << "\n ------------\n";
-  //
-  //
-  std::cout << "J[0] : " << physics[0].getJ_err() << ".\n";
+float NNRocket::getScoreResult(){
+  return J0;
 }
 
 void NNRocket::safe(std::string& _filename){

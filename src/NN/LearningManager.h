@@ -9,8 +9,10 @@ public:
       LearningManager();
       ~LearningManager();
   void init(); 
+  void init(int _rocketIdx);
   void startGo();
   void run_and_show();
+  void sortByScore();
   
   void safe(std::string& _filename, int _rocketIdx);
   void loadFromFile(std::string& _filename, int _rocketIdx);
