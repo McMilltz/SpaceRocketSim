@@ -21,7 +21,7 @@ private:
   NNRocket rocket[ROCKET_COUNT];
   bool isRunning;
 
-  const float timePerGo = 40.0f;
+  const float timePerGo = 20.0f;
   const float dt = 0.02f;
   std::vector<Vector2f> track;
 

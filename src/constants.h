@@ -9,9 +9,10 @@
 #define SCORE_REWARD 10000.0f
 #define START_POSITION {.x = WINDOW_WIDTH / 2, \
                         .y = WINDOW_HEIGHT / 2}
-#define ROCKET_COUNT 6
+#define ROCKET_COUNT 20
 #define J_ENGINE 0
 #define J_ROT_SPEED 1.0f
+#define J_DIRECTION 5.0f
 
 #define FPS 60
 #define IMAGE_DURATION (1000 / FPS)

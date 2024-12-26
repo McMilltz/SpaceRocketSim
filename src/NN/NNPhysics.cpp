@@ -40,14 +40,17 @@ void NNPhysics::update(float _dt){
 }
 
 void NNPhysics::updateErrorFunction(float _dt){
+  float dx = starPosition.x - mPosition.x;
+  float dy = starPosition.y - mPosition.y;
+  float bonus = dx * mVelocity.x + dy * mVelocity.y;
   float dJ = 0.0f;
   for (int it=0; it < AMOUNT_OF_ENGINES; it++) {
     dJ += mEngines[it];
   }
   dJ *= J_ENGINE;
-  dJ += (starPosition - mPosition).magnitude();  
+  // dJ += (starPosition - mPosition).magnitude();  
   dJ += mRotSpeed * mRotSpeed * J_ROT_SPEED;
-
+  dJ -= bonus * J_DIRECTION;
   J_err += dJ * _dt;
 }
 bool NNPhysics::collisionCheck(){

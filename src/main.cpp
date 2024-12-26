@@ -23,14 +23,14 @@
 int main(void) {
   //see previous main method at the end of the file
   {
-   // Game game;
+    // Game game;
     // game.run();
     LearningManager LM;
     std::string file = "RocketBrain.csv";
     std::string file2 = "RocketBrain2.csv";
     LM.init();
-    LM.loadFromFile(file, 0);
-    LM.loadFromFile(file2, 1);
+    // LM.loadFromFile(file, 0);
+    // LM.loadFromFile(file2, 1);
     std::cout << "loading complete.\n";
     LM.run_and_show();
     for (int it=0; it < 5; it++) {
@@ -40,13 +40,13 @@ int main(void) {
       // LM.run_and_show();
       LM.sortByScore();
       for(int s=3; s < ROCKET_COUNT; s++)
-          LM.init(s);
+        LM.init(s);
     }
     LM.run_and_show();
     LM.sortByScore();
 
-    LM.safe(file, 0);
-    LM.safe(file2, 1);
+    // LM.safe(file, 0);
+    // LM.safe(file2, 1);
     // LM.loadFromFile(file, 0);
   }
   return EXIT_SUCCESS;
