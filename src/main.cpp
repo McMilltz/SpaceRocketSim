@@ -23,7 +23,7 @@
 int main(void) {
   //see previous main method at the end of the file
   {
-    if(false){ 
+    if(true){ 
       //Controller activated with space key
       //manual control with a,b,l,Enter for respective engines
       //Exit with Esc
