@@ -23,34 +23,45 @@
 int main(void) {
   //see previous main method at the end of the file
   {
-    // Game game;
-    // game.run();
-    LearningManager LM;
-    std::string file = "RocketBrain.csv";
-    std::string file2 = "RocketBrain2.csv";
-    LM.init();
-    // LM.loadFromFile(file, 0);
-    // LM.loadFromFile(file2, 1);
-    std::cout << "loading complete.\n";
-    LM.run_and_show();
-    for (int it=0; it < 5; it++) {
-      for (int jl=0; jl < 40; jl++) {
-        LM.startGo();
-      }
-      // LM.run_and_show();
-      LM.sortByScore();
-      for(int s=3; s < ROCKET_COUNT; s++)
-        LM.init(s);
+    if(false){ 
+      //Controller activated with space key
+      //manual control with a,b,l,Enter for respective engines
+      //Exit with Esc
+      Game game;
+      game.run();
     }
-    LM.run_and_show();
-    LM.sortByScore();
+    else //try out some NN stuff...
+    { 
+      LearningManager LM;
+      std::string file = "RocketBrain.csv";
+      std::string file2 = "RocketBrain2.csv";
+      LM.init();
+      LM.loadFromFile(file, 0);
+      LM.loadFromFile(file2, 1);
+      std::cout << "loading complete.\n";
+      LM.run_and_show();
+      for (int it=0; it < 2; it++) { //number of learning iterations with display
+        for (int jl=0; jl < 40; jl++) { //number of learning iteratons between each display
+          LM.startGo();
+        }
+        // LM.run_and_show();
+        LM.sortByScore();
+        for(int s=3; s < ROCKET_COUNT; s++)
+            LM.init(s);
+      }
+      LM.run_and_show(); //Display one learning iteration
+      LM.sortByScore();
 
-    // LM.safe(file, 0);
-    // LM.safe(file2, 1);
-    // LM.loadFromFile(file, 0);
+      LM.safe(file, 0);
+      LM.safe(file2, 1);
+      // LM.loadFromFile(file, 0);
+    }
   }
   return EXIT_SUCCESS;
 }
+
+
+
 
 // Rocket rocket;
 // Cockpit* cockpit = nullptr;

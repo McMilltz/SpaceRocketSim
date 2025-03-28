@@ -28,6 +28,8 @@ private:
   Window mainWindow;
   SDL_Renderer* mainRenderer = nullptr;
   int lastUpdate;
+  SDL_Event e;
+  bool quit_program;
 private:
   bool setup();
   void cleanUp();
