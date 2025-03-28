@@ -1,4 +1,6 @@
 #include "LearningManager.h"
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_events.h>
 #include <SDL2/SDL_render.h>
 #include <SDL2/SDL_timer.h>
 #include "../Score.h"
@@ -18,6 +20,7 @@ LearningManager::LearningManager()
   mainWindow.setup_SDL();
 
   isRunning = setup();
+  quit_program = false;
 }
 LearningManager::~LearningManager(){
   cleanUp();
@@ -40,6 +43,8 @@ void LearningManager::init(int _rocketIdx){
 }
 
 void LearningManager::startGo(){
+  if(quit_program)
+    return;
   float time = 0.0f;
   for(int it=0; it < ROCKET_COUNT; it++){
     rocket[it].prepareGo();
@@ -56,8 +61,15 @@ void LearningManager::startGo(){
   for (int it=0; it < ROCKET_COUNT; it++) {
     rocket[it].finishGo();
   }
+  while(SDL_PollEvent(&e)){
+    if(e.type == SDL_QUIT){
+      quit_program = true;
+    }
+  }
 }
 void LearningManager::run_and_show(){
+  if(quit_program)
+    return;
   float time = 0.0f;
   for(int it=0; it < ROCKET_COUNT; it++){
     rocket[it].prepareGo();
@@ -68,7 +80,12 @@ void LearningManager::run_and_show(){
   std::cout << "[LM] run_and_show() begin.\n";
   lastUpdate = SDL_GetTicks();
   while(time < timePerGo && isRunning){
-
+    while(SDL_PollEvent(&e)){
+      if(e.type == SDL_QUIT){
+        isRunning = false;
+        quit_program = true;
+      }
+    }
     int timeSinceLastUpdate = SDL_GetTicks() - lastUpdate;
     // std::cout << timeSinceLastUpdate << " of " << (1000*dt) << "\n";
     while(timeSinceLastUpdate >= 1000 * dt){

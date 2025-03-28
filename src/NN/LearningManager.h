@@ -21,13 +21,15 @@ private:
   NNRocket rocket[ROCKET_COUNT];
   bool isRunning;
 
-  const float timePerGo = 40.0f;
+  const float timePerGo = 20.0f;
   const float dt = 0.02f;
   std::vector<Vector2f> track;
 
   Window mainWindow;
   SDL_Renderer* mainRenderer = nullptr;
   int lastUpdate;
+  SDL_Event e;
+  bool quit_program;
 private:
   bool setup();
   void cleanUp();
